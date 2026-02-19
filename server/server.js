@@ -58,9 +58,11 @@ app.get('/api/health', (req, res) => {
 // Import routes
 const servicesRouter = require('./routes/services');
 const bookingsRouter = require('./routes/bookings');
+const invoicesRouter = require('./routes/invoices');
 
 app.use('/api/services', servicesRouter);
 app.use('/api/bookings', strictLimiter, bookingsRouter);
+app.use('/api/invoices', invoicesRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
