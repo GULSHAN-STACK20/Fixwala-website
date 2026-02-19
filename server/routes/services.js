@@ -39,10 +39,19 @@ router.post('/', async (req, res) => {
 // Update a service
 router.put('/:id', async (req, res) => {
   try {
+    // Only allow specific fields to be updated
+    const allowedUpdates = ['name', 'description', 'icon', 'price', 'duration', 'category', 'isActive'];
+    const updates = {};
+    allowedUpdates.forEach(field => {
+      if (req.body[field] !== undefined) {
+        updates[field] = req.body[field];
+      }
+    });
+
     const service = await Service.findByIdAndUpdate(
       req.params.id,
-      req.body,
-      { new: true }
+      updates,
+      { new: true, runValidators: true }
     );
     if (!service) {
       return res.status(404).json({ message: 'Service not found' });

@@ -40,10 +40,16 @@ router.post('/', async (req, res) => {
 // Update booking status
 router.patch('/:id/status', async (req, res) => {
   try {
+    // Validate status value
+    const validStatuses = ['pending', 'confirmed', 'in-progress', 'completed', 'cancelled'];
+    if (!validStatuses.includes(req.body.status)) {
+      return res.status(400).json({ message: 'Invalid status value' });
+    }
+
     const booking = await Booking.findByIdAndUpdate(
       req.params.id,
       { status: req.body.status },
-      { new: true }
+      { new: true, runValidators: true }
     ).populate('service');
     if (!booking) {
       return res.status(404).json({ message: 'Booking not found' });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 
@@ -19,11 +19,7 @@ function BookService() {
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
 
-  useEffect(() => {
-    fetchService();
-  }, [serviceId]);
-
-  const fetchService = async () => {
+  const fetchService = useCallback(async () => {
     try {
       const response = await api.get(`/services/${serviceId}`);
       setService(response.data);
@@ -32,7 +28,11 @@ function BookService() {
       setMessage({ type: 'error', text: 'Service not found' });
       setLoading(false);
     }
-  };
+  }, [serviceId]);
+
+  useEffect(() => {
+    fetchService();
+  }, [fetchService]);
 
   const handleChange = (e) => {
     setFormData({
