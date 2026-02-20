@@ -1,4 +1,4 @@
-# Fixwala.com - MERN Stack Application
+# Gulshan - MERN Stack Application
 
 A full-stack web application for booking home repair services built with the MERN stack (MongoDB, Express.js, React, Node.js).
 
