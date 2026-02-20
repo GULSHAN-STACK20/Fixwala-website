@@ -1,14 +1,25 @@
-# Gulshan - MERN Stack Application
+# Invoice Details Module – Full Stack MERN Application
 
-A full-stack web application for booking home repair services built with the MERN stack (MongoDB, Express.js, React, Node.js).
+A production-style invoice management module implementing real-world payment logic, balance tracking, and invoice lifecycle management.
 
 ## 🚀 Features
 
-- **Service Booking System**: Browse and book various home repair services
-- **Real-time Updates**: Instant booking confirmations and status updates
-- **RESTful API**: Well-structured backend API for service and booking management
-- **Responsive Design**: Mobile-friendly user interface
-- **Database Integration**: MongoDB for persistent data storage
+- Invoice details view with line items
+- Payment tracking with validation
+- Automatic status update (DRAFT → PAID)
+- Overpayment prevention
+- Archive & restore functionality
+- Clean responsive UI
+
+- ## 🧠 Business Logic Implementation
+
+- Line total = quantity × unit price
+- Invoice total = sum of line totals
+- Balance Due = total − amountPaid
+- Overpayment is prevented via backend validation
+- When balanceDue becomes 0 → status auto-updates to PAID
+- Archive flag implemented using soft-delete pattern
+
 
 ## 📋 Services Offered
 
